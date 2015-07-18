@@ -61,6 +61,8 @@ void swd_init(swd_t *s);
 
 int swd_process(swd_t *s, int edge, int data, uint64_t ts);
 
+void swd_header(unsigned hdr, char *out);
+
 #ifdef __cplusplus
 };
 #endif

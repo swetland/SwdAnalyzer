@@ -43,21 +43,22 @@ void SwdAnalyzerResults::GenerateBubbleText(U64 frame_index, Channel& channel, D
 
 	switch (frame.mType) {
 	case EMIT_HDR:
-		sprintf(tmp, "H=%02x", (unsigned) frame.mData1);
+		swd_header(frame.mData1, tmp);
+		//sprintf(tmp, "H=%02x", (unsigned) frame.mData1);
 		break;
 	case EMIT_TURN:
 		strcpy(tmp,"T");
 		break;
 	case EMIT_ACK:
 		switch(frame.mData1) {
-		case 1: strcpy(tmp,"A=OK"); break;
-		case 2: strcpy(tmp,"A=WAIT"); break;
-		case 4: strcpy(tmp,"A=FAULT"); break;
-		default: strcpy(tmp,"A=INVAL"); break;
+		case 1: strcpy(tmp,"OK"); break;
+		case 2: strcpy(tmp,"WAIT"); break;
+		case 4: strcpy(tmp,"FAULT"); break;
+		default: strcpy(tmp,"INVAL"); break;
 		}
 		break;
 	case EMIT_DATA:
-		sprintf(tmp, "D=%08x", (unsigned) frame.mData1);
+		sprintf(tmp, "DATA: %08x", (unsigned) frame.mData1);
 		break;
 	case EMIT_PARITY:
 		strcpy(tmp,"P");

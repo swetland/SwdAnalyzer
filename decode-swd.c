@@ -98,6 +98,18 @@ const char *addrstr(swd_t *s) {
 	}
 }
 
+void swd_header(unsigned hdr, char *out) {
+	if (hdr & H_AP) {
+		sprintf(out, "%s AP.0x?%x",
+			(hdr & H_RD) ? "RD" : "WR",
+			H_ADDR(hdr) << 2);
+	} else {
+		sprintf(out, "%s DP.%s",
+			(hdr & H_RD) ? "RD" : "WR",
+			(hdr & H_RD) ? dprdstr[H_ADDR(hdr)] : dpwrstr[H_ADDR(hdr)]);
+	}
+}
+
 void printtxn(swd_t *s) {
 #ifndef PLUGIN
 	const char *x;
